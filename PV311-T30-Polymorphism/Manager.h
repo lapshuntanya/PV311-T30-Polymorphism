@@ -15,7 +15,7 @@ public:
 	int getPercent()const;
 	float getSales()const;
 
-	void showInfo()const;
-	float calcSalary()const;
+	void showInfo()const override;
+	float calcSalary()const override;
 };
 

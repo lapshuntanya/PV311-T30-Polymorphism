@@ -17,7 +17,7 @@ public:
 	string getName()const;
 	float getSalary()const;
 
-	void showInfo()const;
-	float calcSalary()const;
+	virtual void showInfo()const;
+	virtual float calcSalary()const;
 };
 

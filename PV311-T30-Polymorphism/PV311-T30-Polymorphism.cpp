@@ -16,6 +16,10 @@ int main()
         new Manager("Місенко Артур", 15'000, 25, 100'000)
     };
 
+    for (int i = 0; i < company.size(); i++)
+    {
+        company[i]->showInfo(); cout << endl;
+    }
 
 
     return 0;
