@@ -23,6 +23,7 @@ void Manager::showInfo() const{
     Employee::showInfo();
     cout << "Percent: " << percent << "%\n";
     cout << "Sales: " << sales << "UAH\n";
+    cout << "TOTAL salary: " << calcSalary() << " UAH\n";
 }
 
 float Manager::calcSalary() const{

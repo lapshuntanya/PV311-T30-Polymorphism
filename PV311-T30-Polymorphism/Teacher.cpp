@@ -21,7 +21,8 @@ float Teacher::getPrice() const{    return price;}
 void Teacher::showInfo() const{
     Employee::showInfo();
     cout << "Hours: " << hours << endl;
-    cout << "Price: " << price << endl;
+    cout << "Price: " << price  << "UAH" << endl;
+    cout << "TOTAL salary: " << calcSalary() << " UAH\n";
 }
 
 float Teacher::calcSalary() const{
