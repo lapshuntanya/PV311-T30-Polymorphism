@@ -3,6 +3,7 @@
 #include "Teacher.h"
 #include <vector>
 #include <typeinfo>
+#include <algorithm>
 
 int main()
 {
@@ -36,15 +37,58 @@ int main()
             }
         }
     }
-
-
+    cout << "++++++++++++++++++++++++++++++++++++++++++++++++\n\n";
     //1. Порахувати кількість робітників, у яких сума продажів більша ніж 15000 та вивести інформацію про них
+    int amount = 0;
+    for (int i = 0; i < company.size(); i++)
+    {
+        Manager* obj = dynamic_cast<Manager*>(company[i]);
+        if (obj != nullptr && obj->getSales() > 15'000)
+        {
+            amount++;
+            obj->showInfo();
+        }
+    }
+    cout << "++++++++++++++++++++++++++++++++++++++++++++++++\n\n";
 
     //2. Відсортувати робітників по сумі з.п - calcSalary
-    
-    //3. Видалити викладачів, якщо у них кількість занять менша за 10 годин
+    sort(company.begin(), company.end(), [](Employee* left, Employee* right) {
+        return left->calcSalary() < right->calcSalary();
+        });
 
-    
+    for_each(company.begin(), company.end(), [](Employee* obj) {
+        obj->showInfo();
+        });
+    cout << "++++++++++++++++++++++++++++++++++++++++++++++++\n\n";
+    //3. Видалити викладачів, якщо у них кількість занять менша за 10 годин
+    for (int i = 0; i < company.size(); i++)
+    {
+        Teacher* obj = dynamic_cast<Teacher*>(company[i]);
+        if (obj != nullptr && obj->getHours() <  10)
+        {
+            company.erase(company.begin() + i);
+            i--;
+        }
+    }
+    for_each(company.begin(), company.end(), [](Employee* obj) {
+        obj->showInfo();
+        });
+    cout << "++++++++++++++++++++++++++++++++++++++++++++++++\n\n";
+    //4. Збільшити відсоток продажів на К, якщо дано Ім'я робітника
+
+    string name = "Місенко Артур";
+    auto item = find_if(company.begin(), company.end(), [name](Employee* obj) {
+        return obj->getName() == name;
+        });
+    Manager* obj = dynamic_cast<Manager*>(*item);
+    if (obj != nullptr)
+    {
+        obj->setPercent(obj->getPercent() + 15);
+    }
+    for_each(company.begin(), company.end(), [](Employee* obj) {
+        obj->showInfo();
+        });
+
     return 0;
 }
 
