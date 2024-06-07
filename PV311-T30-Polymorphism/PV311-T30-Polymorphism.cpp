@@ -2,6 +2,7 @@
 #include "Manager.h"
 #include "Teacher.h"
 #include <vector>
+#include <typeinfo>
 
 int main()
 {
@@ -20,7 +21,21 @@ int main()
     {
         company[i]->showInfo(); cout << endl;
     }
-
+    cout << "----------------------------------------------\n\n";
+    //Всім викладачам збільшити ціну заняття на 100 грн
+    for (int i = 0; i < company.size(); i++)
+    {
+        if (typeid(*company[i]) == typeid(Teacher))
+        {
+            cout << company[i]->getName() << endl;
+           // ((Teacher*)company[i])->setPrice(1'000);
+            Teacher* obj = dynamic_cast<Teacher*>(company[i]);
+            if (obj != nullptr) {
+                obj->setPrice(obj->getPrice() + 100);
+                cout << "New Price: " << obj->getPrice() << endl;
+            }
+        }
+    }
 
     return 0;
 }
